@@ -1,12 +1,13 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"); */
 :root {
-  --title-font-size: 4vmax;
-  --title-margin: 2vmax;
-  --button-width: 14vmax;
-  --button-height: 14vmax;
-  --button-border-width: 1vmax;
-  --button-margin: 1vmax;
-  --flash-box-shadow-width: 1vmax;
+  --main-bg-color: hsl(211, 97%, 13%);
+  --title-font-size: 64px;
+  --title-margin: 10px;
+  --button-width: 204px;
+  --button-height: 204px;
+  --button-border-width: 16px;
+  --button-margin: 16px;
+  --flash-box-shadow-width: 16px;
   --total-button-size: calc(
     var(--button-width) * 2 + var(--button-border-width) + var(--button-margin)
   );
@@ -26,7 +27,7 @@ body {
   max-height: 100vh;
   overflow: hidden;
   text-align: center;
-  background-color: #011f3f;
+  background-color: var(--main-bg-color);
 }
 
 a {
@@ -35,7 +36,7 @@ a {
 }
 
 .simonGameBox {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +51,7 @@ a {
 }
 
 .howToPlayTip {
-  font-size: 1vmax;
+  font-size: 16px;
   margin: var(--title-margin);
 }
 
@@ -96,6 +97,53 @@ a {
   opacity: 0.8;
 }
 
+.startBtn {
+  font-family: "Press Start 2P", cursive;
+  font-size: 32px;
+  border: 2px solid black;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, red, blue, green, yellow);
+  letter-spacing: 1px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.startBtn:hover,
+.startBtn:focus {
+  /* outline: none; */
+  color: white;
+  box-shadow: 0 0 10px blue;
+}
+
+.startBtn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: calc(20px - 4px);
+  background-color: var(--main-bg-color);
+  transition: 200ms;
+}
+
+.startBtn:hover::before,
+.startBtn:focus::before {
+  width: 100%;
+}
+
 @keyframes flash {
   0% {
     opacity: 1;
@@ -116,4 +164,13 @@ a {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --button-width: 150px;
+    --button-height: 150px;
+    --button-border-width: 10px;
+    --button-margin: 10px;
+  }
 }

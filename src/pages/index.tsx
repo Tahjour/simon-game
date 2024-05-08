@@ -25,19 +25,19 @@ export default function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    function handleKeyDown() {
-      if (!gameStarted) {
-        setGameOver(false);
-        setGameStarted(true);
-        nextSequence();
-      }
-    }
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [gameStarted, gameOver, nextSequence]); // Only re-run the effect if the gameStarted state changes
+  // useEffect(() => {
+  //   function handleKeyDown() {
+  //     if (!gameStarted) {
+  //       setGameOver(false);
+  //       setGameStarted(true);
+  //       nextSequence();
+  //     }
+  //   }
+  //   document.addEventListener("keydown", handleKeyDown);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, [gameStarted, gameOver, nextSequence]); // Only re-run the effect if the gameStarted state changes
 
   function checkAnswers(newUserClickedPattern: string[], currentIndex: number) {
     if (newUserClickedPattern[currentIndex] === gamePattern[currentIndex]) {
@@ -80,8 +80,8 @@ export default function Home() {
     <section className={`simonGameBox ${gameOverFlash ? "gameOverFlashScreen" : ""}`}>
       <h1 id="levelTitle">
         {gameStarted && `Level: ${level}`}
-        {!gameStarted && !gameOver && "Press any key to start"}
-        {gameOver && !gameStarted ? "Game Over. Press a key to restart." : ""}
+        {!gameStarted && !gameOver && "Simon Game"}
+        {gameOver && !gameStarted ? "Game Over." : ""}
       </h1>
       <p className="howToPlayTip">
         The Simon Game, a short term memory test. Try to remember the pattern of flashes.
@@ -98,6 +98,18 @@ export default function Home() {
           ></button>
         ))}
       </div>
+      {!gameStarted && (
+        <button
+          className="startBtn"
+          onClick={() => {
+            setGameOver(false);
+            setGameStarted(true);
+            nextSequence();
+          }}
+        >
+          Start Game
+        </button>
+      )}
     </section>
   );
 }
